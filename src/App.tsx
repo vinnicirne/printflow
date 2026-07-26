@@ -9,7 +9,7 @@ import { PrintQueueView } from './components/PrintQueueView';
 import { ShippingView } from './components/ShippingView';
 import { CustomerPortalView } from './components/CustomerPortalView';
 import { IntegrationsView } from './components/IntegrationsView';
-
+import { Routes, Route, Outlet, useNavigate } from 'react-router-dom';
 import {
   fetchStats,
   fetchOrders,
@@ -25,7 +25,7 @@ import { Order, PrintTemplate, FactoryStats, MarketIntegration, PhotoItem, Photo
 import { INITIAL_ORDERS, INITIAL_TEMPLATES, INITIAL_INTEGRATIONS, INITIAL_STATS, INITIAL_PHOTO_KITS } from './data/initialData';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<string>('dashboard');
+  const navigate = useNavigate();
   const [currentStore, setCurrentStore] = useState<string>('matriz');
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
@@ -313,50 +313,79 @@ export default function App() {
     showNotification('Sincronização de marketplace atualizada!');
   };
 
-  return (
+  // Admin Layout Component
+  const AdminLayout = () => (
     <div className="flex min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-white">
-      {/* Toast Notification */}
-      {notification && (
-        <div className="fixed bottom-5 right-5 bg-cyan-600 text-white font-semibold text-xs px-4 py-3 rounded-xl shadow-2xl border border-cyan-400 z-50 animate-bounce">
-          {notification}
-        </div>
-      )}
-
-      {/* Collapsible Left Navigation Sidebar */}
       <Sidebar
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
         stats={stats}
         currentStore={currentStore}
         setCurrentStore={setCurrentStore}
         isCollapsed={isCollapsed}
         setIsCollapsed={setIsCollapsed}
       />
-
-      {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 min-h-screen">
-        {/* Top Header Bar */}
         <TopBar
-          activeTab={activeTab}
           stats={stats}
           currentStore={currentStore}
           isCollapsed={isCollapsed}
           setIsCollapsed={setIsCollapsed}
-          setActiveTab={setActiveTab}
         />
-
-        {/* View Content Body */}
         <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          {activeTab === 'dashboard' && (
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
+
+  return (
+    <>
+      {notification && (
+        <div className="fixed bottom-5 right-5 bg-cyan-600 text-white font-semibold text-xs px-4 py-3 rounded-xl shadow-2xl border border-cyan-400 z-50 animate-bounce">
+          {notification}
+        </div>
+      )}
+
+      <Routes>
+        {/* Public / Customer Portal Route */}
+        <Route path="/" element={
+          <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-white">
+            <CustomerPortalView
+              templates={templates}
+              photoKits={photoKits}
+              onSaveKits={handleSaveKits}
+              onOrderCreated={() => {
+                loadData();
+                navigate('/pedidos');
+                showNotification('Novo pedido importado para a Esteira!');
+              }}
+            />
+          </div>
+        } />
+
+        {/* Admin Routes with Layout */}
+        <Route element={<AdminLayout />}>
+          <Route path="/dashboard" element={
             <DashboardView
               stats={stats}
               orders={orders}
-              onNavigateTab={setActiveTab}
+              onNavigateTab={(tab) => {
+                const routes = {
+                  'pipeline': '/pedidos',
+                  'autocrop': '/autocrop',
+                  'templates': '/template',
+                  'print_queue': '/fila-de-impressao',
+                  'shipping': '/expedicao',
+                  'integrations': '/configuracoes',
+                  'client_portal': '/',
+                  'dashboard': '/dashboard'
+                };
+                navigate(routes[tab as keyof typeof routes] || '/dashboard');
+              }}
               onProcessAllAI={handleProcessAllAI}
             />
-          )}
-
-          {activeTab === 'pipeline' && (
+          } />
+          
+          <Route path="/pedidos" element={
             <PipelineView
               orders={orders}
               templates={templates}
@@ -365,7 +394,7 @@ export default function App() {
               onPrintDirectly={handlePrintDirectly}
               onSelectOrderForStudio={(order) => {
                 setSelectedStudioOrder(order);
-                setActiveTab('autocrop');
+                navigate('/autocrop');
               }}
               onUpdateOrderPhotos={handleUpdateOrderPhotos}
               onGenerateCombinedPDF={handleGenerateCombinedPDF}
@@ -373,26 +402,26 @@ export default function App() {
               onEditOrder={handleEditOrder}
               onDeleteOrder={handleDeleteOrder}
             />
-          )}
+          } />
 
-          {activeTab === 'autocrop' && (
+          <Route path="/autocrop" element={
             <AutoCropStudioView
               order={selectedStudioOrder || orders[0]}
               onUpdateOrderPhotos={handleUpdateOrderPhotos}
-              onNavigateTab={setActiveTab}
+              onNavigateTab={() => navigate('/pedidos')}
             />
-          )}
+          } />
 
-          {activeTab === 'templates' && (
+          <Route path="/template" element={
             <TemplateEngineView
               templates={templates}
               onSaveTemplate={handleSaveTemplate}
               photoKits={photoKits}
               onSaveKits={handleSaveKits}
             />
-          )}
+          } />
 
-          {activeTab === 'print_queue' && (
+          <Route path="/fila-de-impressao" element={
             <PrintQueueView
               orders={orders}
               templates={templates}
@@ -402,36 +431,23 @@ export default function App() {
               onGenerateCombinedPDF={handleGenerateCombinedPDF}
               onPrintCombinedDirectly={handlePrintCombinedDirectly}
             />
-          )}
+          } />
 
-          {activeTab === 'shipping' && (
+          <Route path="/expedicao" element={
             <ShippingView
               orders={orders}
               onMarkAsDispatched={handleMarkAsDispatched}
             />
-          )}
+          } />
 
-          {activeTab === 'client_portal' && (
-            <CustomerPortalView
-              templates={templates}
-              photoKits={photoKits}
-              onSaveKits={handleSaveKits}
-              onOrderCreated={() => {
-                loadData();
-                setActiveTab('pipeline');
-                showNotification('Novo pedido importado para a Esteira!');
-              }}
-            />
-          )}
-
-          {activeTab === 'integrations' && (
+          <Route path="/configuracoes" element={
             <IntegrationsView
               integrations={integrations}
               onToggleIntegration={handleToggleIntegration}
             />
-          )}
-        </main>
-      </div>
-    </div>
+          } />
+        </Route>
+      </Routes>
+    </>
   );
 }

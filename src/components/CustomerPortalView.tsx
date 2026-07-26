@@ -15,7 +15,13 @@ import {
   ChevronDown,
   Package,
   Star,
-  Copy
+  Copy,
+  Camera,
+  UploadCloud,
+  Truck,
+  ShieldCheck,
+  Smartphone,
+  Heart
 } from 'lucide-react';
 import { PrintTemplate, PhotoKit } from '../types';
 import { createOrder } from '../services/api';
@@ -229,20 +235,95 @@ export const CustomerPortalView: React.FC<CustomerPortalViewProps> = ({
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 py-2">
-      {/* Client Header Card */}
-      <div className="bg-gradient-to-r from-slate-900 via-cyan-950 to-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl text-center space-y-3 relative overflow-hidden">
-        <div className="inline-flex items-center space-x-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 px-3 py-1 rounded-full text-xs font-semibold">
-          <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-          <span>Portal Personalizado de Envio & Preview em Tempo Real</span>
+    <div className="flex flex-col lg:flex-row min-h-screen bg-slate-950 text-slate-100 font-sans">
+      
+      {/* LEFT PANE - FIXED BRANDING & HERO */}
+      <div className="lg:w-[45%] lg:fixed lg:h-screen bg-slate-900 border-r border-slate-800 flex flex-col justify-between overflow-y-auto relative">
+        <div className="absolute top-0 left-0 w-full h-[500px] bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none" />
+        
+        <div className="p-8 lg:p-12 relative z-10 space-y-12">
+          {/* Logo */}
+          <div className="flex items-center space-x-3">
+            <div className="bg-gradient-to-tr from-cyan-500 to-blue-600 p-2 rounded-xl shadow-lg">
+              <Camera className="w-6 h-6 text-white" />
+            </div>
+            <span className="font-extrabold text-2xl tracking-tight text-white">PrintFlow<span className="text-cyan-400">.AI</span></span>
+          </div>
+
+          {/* Hero Content */}
+          <div className="space-y-6">
+            <div className="inline-flex items-center space-x-2 bg-slate-950 border border-slate-800 text-cyan-300 px-4 py-1.5 rounded-full text-xs font-semibold shadow-xl">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+              <span>A Revolução da Fotografia IA</span>
+            </div>
+            <h1 className="text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.1]">
+              Suas Fotos Virando <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+                Lembranças Reais
+              </span>
+            </h1>
+            <p className="text-slate-400 text-lg leading-relaxed">
+              Transforme o rolo da câmera do seu celular em Ímãs e Polaroids. A IA faz o enquadramento perfeito pra você.
+            </p>
+          </div>
+
+          {/* Quick Steps */}
+          <div className="space-y-4 pt-4 border-t border-slate-800/60">
+            <h3 className="text-sm font-bold text-slate-300 uppercase tracking-widest">Como Funciona</h3>
+            <div className="space-y-4">
+              <div className="flex items-center space-x-4">
+                <div className="w-10 h-10 rounded-full bg-slate-950 border border-slate-800 flex items-center justify-center shrink-0">
+                  <Package className="w-4 h-4 text-cyan-400" />
+                </div>
+                <div>
+                  <p className="text-white font-semibold text-sm">1. Escolha o Pacote</p>
+                  <p className="text-slate-500 text-xs">Selecione fotos, ímãs ou polaroids.</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <div className="w-10 h-10 rounded-full bg-slate-950 border border-slate-800 flex items-center justify-center shrink-0">
+                  <Smartphone className="w-4 h-4 text-blue-400" />
+                </div>
+                <div>
+                  <p className="text-white font-semibold text-sm">2. Envie do Celular</p>
+                  <p className="text-slate-500 text-xs">Upload rápido. A IA enquadra os rostos.</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <div className="w-10 h-10 rounded-full bg-slate-950 border border-slate-800 flex items-center justify-center shrink-0">
+                  <Truck className="w-4 h-4 text-emerald-400" />
+                </div>
+                <div>
+                  <p className="text-white font-semibold text-sm">3. Receba em Casa</p>
+                  <p className="text-slate-500 text-xs">Impressão fotográfica de alta qualidade.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-          Crie suas Lembranças com IA
-        </h1>
-        <p className="text-slate-300 text-sm max-w-xl mx-auto">
-          Envie suas fotos favoritas. Nossa inteligência artificial centraliza os rostos e aplica o enquadramento perfeito automaticamente!
-        </p>
+
+        {/* Footer info in Left Side */}
+        <div className="p-8 lg:p-12 border-t border-slate-800/60 relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+           <div className="flex items-center space-x-2 text-slate-400 text-xs font-medium">
+             <Star className="w-4 h-4 text-yellow-500" />
+             <span>Qualidade Premium</span>
+           </div>
+           <div className="flex items-center space-x-2 text-slate-400 text-xs font-medium">
+             <ShieldCheck className="w-4 h-4 text-cyan-500" />
+             <span>Privacidade Garantida</span>
+           </div>
+        </div>
       </div>
+
+      {/* RIGHT PANE - ORDERING FORM */}
+      <div className="lg:w-[55%] lg:ml-[45%] bg-slate-950 min-h-screen relative">
+        <div className="max-w-3xl mx-auto p-4 sm:p-8 lg:p-12 space-y-8">
+          
+          <div className="space-y-2 mb-8 border-b border-slate-800 pb-6">
+            <h2 className="text-2xl font-bold text-white">Criar Novo Pedido</h2>
+            <p className="text-slate-400 text-sm">Preencha os dados abaixo e veja a mágica acontecer</p>
+          </div>
 
       {orderSuccess && (
         <div className="bg-emerald-950/90 border-2 border-emerald-500 text-emerald-200 p-6 rounded-2xl text-center space-y-2 shadow-2xl animate-fade-in">
@@ -254,131 +335,11 @@ export const CustomerPortalView: React.FC<CustomerPortalViewProps> = ({
         </div>
       )}
 
-      {/* Step 1: Select Product Template */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 space-y-3 shadow-md">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <h2 className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center space-x-2">
-            <ShoppingBag className="w-4 h-4 text-cyan-400" />
-            <span>1. Escolha o Produto / Tamanho Desejado</span>
-          </h2>
-          <span className="text-[11px] bg-cyan-950 text-cyan-300 border border-cyan-800/80 px-2.5 py-1 rounded-lg font-semibold self-start sm:self-auto">
-            {selectedTemplate.columns * selectedTemplate.rows} itens por folha {selectedTemplate.pageSize}
-          </span>
-        </div>
-
-        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3">
-          <div className="flex-1 relative">
-            <select
-              value={selectedTemplate.id}
-              onChange={(e) => {
-                const found = templates.find((t) => t.id === e.target.value);
-                if (found) setSelectedTemplate(found);
-              }}
-              className="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 font-semibold focus:border-cyan-500 focus:outline-none appearance-none cursor-pointer pr-10"
-            >
-              {templates.map((tmpl) => (
-                <option key={tmpl.id} value={tmpl.id} className="bg-slate-900 text-slate-200">
-                  {tmpl.name} — ({tmpl.badgeTag}) • {tmpl.columns}x{tmpl.rows} na folha {tmpl.pageSize}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-          </div>
-
-          <div className="bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-slate-300 flex items-center justify-between gap-3">
-            <span className="text-slate-400 text-[11px] shrink-0 font-medium">Descrição:</span>
-            <span className="font-medium text-slate-200 truncate">{selectedTemplate.description}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Step 2: Select Package / Photo Kit */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 space-y-4 shadow-md">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="flex items-center space-x-3">
-            <h2 className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center space-x-2">
-              <Package className="w-4 h-4 text-cyan-400" />
-              <span>2. Escolha o Pacote de Fotos e Valor</span>
-            </h2>
-
-            <button
-              type="button"
-              onClick={() => setShowKitManager(!showKitManager)}
-              className="text-[11px] flex items-center space-x-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 px-2.5 py-1 rounded-lg transition-all font-semibold"
-            >
-              <span>⚙️ Configurar Preços / Pacotes</span>
-            </button>
-          </div>
-
-          <span className="text-xs text-slate-300 bg-slate-950 border border-slate-800 px-3 py-1 rounded-lg">
-            Selecionado: <strong className="text-cyan-300 font-bold">{selectedKit.starred ? '⭐ ' : ''}{selectedKit.name} — R$ {selectedKit.price.toFixed(2).replace('.', ',')}</strong>
-          </span>
-        </div>
-
-        {/* Collapsible Pricing Manager directly inside Customer Portal */}
-        {showKitManager && (
-          <div className="mb-4">
-            <PackagePricingManager
-              photoKits={activeKits}
-              onSaveKits={(updated) => {
-                onSaveKits(updated);
-              }}
-              onClose={() => setShowKitManager(false)}
-            />
-          </div>
-        )}
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-          {activeKits.map((kit) => {
-            const isSelected = selectedKit.id === kit.id;
-            return (
-              <button
-                key={kit.id}
-                type="button"
-                onClick={() => setSelectedKit(kit)}
-                className={`relative p-4 rounded-xl text-left border transition-all flex flex-col justify-between cursor-pointer ${
-                  isSelected
-                    ? 'bg-gradient-to-b from-cyan-950/80 to-slate-900 border-cyan-500 ring-2 ring-cyan-500/30 shadow-lg scale-[1.02]'
-                    : 'bg-slate-950/80 hover:bg-slate-800/60 border-slate-800 text-slate-300'
-                }`}
-              >
-                {kit.tag && (
-                  <span className={`absolute -top-2.5 right-3 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider border ${
-                    isSelected ? 'bg-cyan-500 text-slate-950 border-cyan-400' : 'bg-slate-800 text-cyan-300 border-slate-700'
-                  }`}>
-                    {kit.tag}
-                  </span>
-                )}
-
-                <div className="space-y-1">
-                  <div className="flex items-center space-x-1.5">
-                    {kit.starred && <Star className="w-4 h-4 text-amber-400 fill-amber-400 shrink-0" />}
-                    <span className={`text-xs font-bold ${isSelected ? 'text-white' : 'text-slate-200'}`}>
-                      {kit.name}
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-slate-400">
-                    Capacidade: <span className="font-semibold text-slate-200">{kit.photoCount} foto{kit.photoCount > 1 ? 's' : ''}</span>
-                  </p>
-                </div>
-
-                <div className="mt-3 pt-2 border-t border-slate-800/80 flex items-baseline justify-between">
-                  <span className="text-[10px] text-slate-500 uppercase font-semibold">Valor</span>
-                  <span className={`text-sm font-extrabold ${isSelected ? 'text-cyan-300' : 'text-slate-200'}`}>
-                    R$ {kit.price.toFixed(2).replace('.', ',')}
-                  </span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Step 3: Customer Information */}
+      {/* Step 1: Customer Information */}
       <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 space-y-4 shadow-md">
         <h2 className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center space-x-2">
           <Zap className="w-4 h-4 text-cyan-400" />
-          <span>3. Dados para Envio do Pedido</span>
+          <span>1. Dados para Envio do Pedido</span>
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
@@ -415,6 +376,44 @@ export const CustomerPortalView: React.FC<CustomerPortalViewProps> = ({
         </div>
       </div>
 
+      {/* Step 2: Select Product Template */}
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 space-y-3 shadow-md">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <h2 className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center space-x-2">
+            <ShoppingBag className="w-4 h-4 text-cyan-400" />
+            <span>2. Escolha o Produto / Tamanho Desejado</span>
+          </h2>
+          <span className="text-[11px] bg-cyan-950 text-cyan-300 border border-cyan-800/80 px-2.5 py-1 rounded-lg font-semibold self-start sm:self-auto">
+            {selectedTemplate.columns * selectedTemplate.rows} itens por folha {selectedTemplate.pageSize}
+          </span>
+        </div>
+
+        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3">
+          <div className="flex-1 relative">
+            <select
+              value={selectedTemplate.id}
+              onChange={(e) => {
+                const found = templates.find((t) => t.id === e.target.value);
+                if (found) setSelectedTemplate(found);
+              }}
+              className="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 font-semibold focus:border-cyan-500 focus:outline-none appearance-none cursor-pointer pr-10"
+            >
+              {templates.map((tmpl) => (
+                <option key={tmpl.id} value={tmpl.id} className="bg-slate-900 text-slate-200">
+                  {tmpl.name} — ({tmpl.badgeTag}) • {tmpl.columns}x{tmpl.rows} na folha {tmpl.pageSize}
+                </option>
+              ))}
+            </select>
+            <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          </div>
+
+          <div className="bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-slate-300 flex items-center justify-between gap-3">
+            <span className="text-slate-400 text-[11px] shrink-0 font-medium">Descrição:</span>
+            <span className="font-medium text-slate-200 truncate">{selectedTemplate.description}</span>
+          </div>
+        </div>
+      </div>
+
       {/* Hidden native file input */}
       <input
         type="file"
@@ -425,13 +424,13 @@ export const CustomerPortalView: React.FC<CustomerPortalViewProps> = ({
         className="hidden"
       />
 
-      {/* Step 4: Upload Photos & Real-time Grid Preview */}
+      {/* Step 3: Upload Photos & Real-time Grid Preview */}
       <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6 shadow-md">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h2 className="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center space-x-2">
               <ImageIcon className="w-4 h-4 text-cyan-400" />
-              <span>4. Suas Fotos e Legendamento ({photos.length} de {selectedKit.photoCount} fotos)</span>
+              <span>3. Suas Fotos e Legendamento ({photos.length} de {selectedKit.photoCount} fotos)</span>
             </h2>
             <p className="text-xs text-slate-400 mt-0.5">
               Enquadramento automático de rostos e pets no produto {selectedTemplate.name}.
@@ -593,7 +592,70 @@ export const CustomerPortalView: React.FC<CustomerPortalViewProps> = ({
           )}
         </div>
 
-        {/* Total and Submit Action */}
+        {/* Step 4: Select Package / Photo Kit */}
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 space-y-4 shadow-md">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center space-x-3">
+            <h2 className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center space-x-2">
+              <Package className="w-4 h-4 text-cyan-400" />
+              <span>4. Escolha o Pacote de Fotos</span>
+            </h2>
+          </div>
+
+          <span className="text-xs text-slate-300 bg-slate-950 border border-slate-800 px-3 py-1 rounded-lg">
+            Selecionado: <strong className="text-cyan-300 font-bold">{selectedKit.starred ? '⭐ ' : ''}{selectedKit.name} — R$ {selectedKit.price.toFixed(2).replace('.', ',')}</strong>
+          </span>
+        </div>
+
+
+        <div className="space-y-3 pt-2">
+          {activeKits.map((kit) => {
+            const isSelected = selectedKit.id === kit.id;
+            return (
+              <button
+                key={kit.id}
+                type="button"
+                onClick={() => setSelectedKit(kit)}
+                className={`w-full relative flex items-center justify-between p-4 rounded-2xl border transition-all cursor-pointer ${
+                  isSelected
+                    ? 'bg-cyan-950/40 border-cyan-500 shadow-md ring-1 ring-cyan-500'
+                    : 'bg-slate-950/50 hover:bg-slate-900 border-slate-800'
+                }`}
+              >
+                <div className="flex items-center space-x-4">
+                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${isSelected ? 'border-cyan-400 bg-cyan-950' : 'border-slate-600'}`}>
+                     {isSelected && <div className="w-2.5 h-2.5 rounded-full bg-cyan-400" />}
+                  </div>
+                  <div className="text-left">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                      <span className={`text-sm font-bold ${isSelected ? 'text-white' : 'text-slate-300'}`}>
+                        {kit.name}
+                      </span>
+                      <div className="flex items-center space-x-2">
+                        {kit.starred && <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />}
+                        {kit.tag && (
+                          <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${isSelected ? 'bg-cyan-500/20 text-cyan-300' : 'bg-slate-800 text-slate-400'}`}>
+                            {kit.tag}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <p className="text-xs text-slate-500 mt-0.5">Rende até <span className="font-semibold text-slate-400">{kit.photoCount} fotos</span></p>
+                  </div>
+                </div>
+                
+                <div className="text-right pl-3 border-l border-slate-800/60">
+                  <span className={`text-lg font-black tracking-tight ${isSelected ? 'text-cyan-400' : 'text-slate-300'}`}>
+                    R$ {kit.price.toFixed(2).replace('.', ',')}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Total and Submit Action */}
         <div className="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <span className="text-xs text-slate-400">Total do Pedido ({photos.length} fotos — {selectedKit.starred ? '⭐ ' : ''}{selectedKit.name}):</span>
@@ -608,6 +670,8 @@ export const CustomerPortalView: React.FC<CustomerPortalViewProps> = ({
             <span>{isSubmitting ? 'Enviando Pedido...' : 'Aprovar e Enviar para Produção Instantânea'}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
+        </div>
+      </div>
         </div>
       </div>
     </div>
