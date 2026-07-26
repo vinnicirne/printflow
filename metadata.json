@@ -1,0 +1,6 @@
+{
+  "name": "PrintFlow AI - Operating System for Photo Print Factories",
+  "description": "Smart SaaS platform automating personalized photo production, AI auto-cropping, universal print templates, PDF grid batch generator, and shipping integrations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

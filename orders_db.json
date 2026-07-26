@@ -1,0 +1,42 @@
+[
+  {
+    "customerName": "",
+    "customerEmail": "",
+    "customerPhone": "",
+    "marketplace": "direto",
+    "productName": "Foto Ímã 6.13x6.13 cm (Tamanho final da imagem) (⭐ Kit Família (12))",
+    "templateId": "ima_6x6_a4",
+    "totalPhotos": 1,
+    "itemPrice": 69.9,
+    "totalPrice": 69.9,
+    "timeSavedMinutes": 15,
+    "shippingCarrier": "melhor_envio",
+    "photos": [
+      {
+        "id": "ph_1785023675532_0_hy0d",
+        "originalUrl": "https://zrrsayypnldkpirpghnt.supabase.co/storage/v1/object/public/fotos/ord_1785023684732/foto_1785023675532_0_hy0d.jpg",
+        "filename": "foto_1785023675532_0_hy0d.jpg",
+        "caption": "Vinni",
+        "status": "auto_cropped",
+        "aiCrop": {
+          "focalPoint": {
+            "x": 50,
+            "y": 36
+          },
+          "zoom": 1.2,
+          "rotation": 0,
+          "subjectType": "face",
+          "confidence": 0.96,
+          "recommendedMargin": 4,
+          "suggestedCaption": "Vinni"
+        }
+      }
+    ],
+    "id": "ord_1785023684732",
+    "code": "#PF-4664",
+    "createdAt": "2026-07-25T23:54:44.732Z",
+    "updatedAt": "2026-07-26T01:28:48.061Z",
+    "status": "expedido",
+    "pdfUrl": "/api/orders/ord_1785023684732/download-pdf"
+  }
+]
